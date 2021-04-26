@@ -1,12 +1,11 @@
-import Nav from './Components/Nav/Nav'
-import Hello from './Components/Welcome/Hello'
+import Header from './Components/Header/Header'
+import './App.scss'
 
 function App() {
 
   return (
     <>
-    <Nav/>
-    <Hello/>
+      <Header/>
     </>
   );
 }
