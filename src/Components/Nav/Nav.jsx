@@ -1,8 +1,10 @@
+import './Nav.scss'
+
 export default function Nav() {
   return (
-    <div className="nav-bar">
-      <div className="title">GlasmorphismTS</div>
-      <div className='creator'>Created by: Mitchell Gonzalez</div>
-    </div>
+    <ul className="nav-bar">
+      <li className="title">GlassmorphismTS</li>
+      <li className='creator'>Created by: Mitchell Gonzalez</li>
+    </ul>
   );
 }
