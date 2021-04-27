@@ -20,12 +20,17 @@ type rgbColor = {
 export default function CSSGenerator() {
   const classes = useStyles();
 
-  // const [color, setColor] = useState<string>('#292929')
+  const [color, setColor] = useState<string>('#292929')
+  // const [color, setColor] = useState<string>()
+  
+  // const initialColorVal = hexToRgb(color);
   const [colorRGB, setColorRGB] = useState<rgbColor>({
     r: 41,
     g: 41,
     b: 41
   })
+
+
   const [blur, setBlur] = useState<number>(20);
   const [transparency, setTransparency] = useState<number>(0.1);
 
@@ -46,11 +51,11 @@ export default function CSSGenerator() {
     } : null;
   }
 
-  // const handleColor = (hexColor:string):void => {
-  //   const rgbObj = hexToRgb(hexColor);
-  //   setColorRGB(rgbObj);
-  // }
-
+  function handleColorChange(color:string):any {
+    const rgbObj = hexToRgb(color);
+    setColor(color);
+    setColorRGB({...rgbObj});
+  }
 
   return (
     <div className="css-generator">
@@ -79,27 +84,19 @@ export default function CSSGenerator() {
           }
         />
         <div className="background-color-changer">
-            <p>Background Color:</p>
+        <h3 className="slider-title"> Glass Color </h3>
             <ColorPicker
               name="color"
-              value={colorRGB}
+              value={color}
               onChange={(color) => {
-                // console.log(color)
-                // console.log(hexToRgb(color))
-                // setColor(color);
-                const rgbObj = hexToRgb(color);
-                setColorRGB((prevState) => {
-                  return {
-                    ...rgbObj
-                  }
-                })
+                handleColorChange(color);
               }}
             />
           </div>
         <h3 className="css-code-title"> CSS Code For Glass: </h3>
         <section className="css-code">
           <code>
-            background: rgba(186, 169, 169, {transparency}),<br></br>
+            background: rgba({colorRGB.r}, {colorRGB.g}, {colorRGB.b}, {transparency}),<br></br>
             boxShadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),<br></br>
             backdrop-filter: blur({blur}px),<br></br>
             -webkit-backdrop-filter: blur({blur}px),<br></br>
