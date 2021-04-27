@@ -14,8 +14,6 @@ const useStyles = makeStyles({
 
 export default function CSSGenerator() {
   const classes = useStyles();
-
-  // const [color, setColor] = useState("#05A6FC");
   const [blur, setBlur] = useState(0);
   const [transparency, setTransparency] = useState(0);
 
@@ -31,19 +29,18 @@ export default function CSSGenerator() {
   return (
     <>
       <div className="css-generator">
-        <h2>CSS Generator:</h2>
-        <div className="dynamic-glass"
-          style= {
-            {
-              margin: '50px',
-              background: `rgba(186, 169, 169, ${transparency})`,
-              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-              backdropFilter: `blur(${blur}px)`,
-              webkitBackdropFilter: `blur(${blur}px)`,
-              borderRadius: `10px`,
-              border: `1px solid rgba(255, 255, 255, 0.18)`
-            }
-          }
+        <h2 className="gen-title">CSS Generator:</h2>
+        <div
+          className="dynamic-glass"
+          style={{
+            margin: "50px",
+            background: `rgba(186, 169, 169, ${transparency})`,
+            boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+            backdropFilter: `blur(${blur}px)`,
+            webkitBackdropFilter: `blur(${blur}px)`,
+            borderRadius: `10px`,
+            border: `1px solid rgba(255, 255, 255, 0.18)`
+          }}
         >
           <TextBox
             text={
@@ -60,6 +57,17 @@ export default function CSSGenerator() {
               }}
             />
           </div> */}
+          <section className='css-code'>
+          <code>
+            background: rgba(186, 169, 169, {transparency}),<br></br>
+            boxShadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),<br></br>
+            backdrop-filter: blur({blur}px),<br></br>
+            -webkit-backdrop-filter: blur({blur}px),<br></br>
+            border-radius: 10px,<br></br>
+            border: 1px solid rgba(255, 255, 255, 0.18)
+          </code>
+          </section>
+
           <h3> GlassBox Modifiers </h3>
           <div className={classes.root}>
             <p>Blur {blur}</p>
@@ -67,6 +75,7 @@ export default function CSSGenerator() {
               value={blur}
               onChange={handleBlur}
               aria-labelledby="continuous-slider"
+              defaultValue={20}
               min={0}
               max={20}
               step={0.25}
@@ -76,11 +85,11 @@ export default function CSSGenerator() {
               value={transparency}
               onChange={handleTransparency}
               aria-labelledby="continuous-slider"
+              defaultValue={0.1}
               min={0}
               max={1}
               step={0.1}
             />
-            <p></p>
           </div>
         </div>
       </div>

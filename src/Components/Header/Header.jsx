@@ -20,7 +20,6 @@ export default function Header() {
         <GlassBox>
           <Hello/>
         </GlassBox>
-      <div className='extra-padding'><p></p></div>
     </div>
   )
 }
