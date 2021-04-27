@@ -56,6 +56,7 @@ export default function CSSGenerator() {
               }}
             />
           </div> */}
+        <h3 className="css-code-title"> CSS Code: </h3>
         <section className="css-code">
           <code>
             background: rgba(186, 169, 169, {transparency}),<br></br>
@@ -88,7 +89,7 @@ export default function CSSGenerator() {
           />
           <ul>
             <li>
-              <p className="slider-titles">Transparency {transparency}</p>
+              <p className="slider-titles">Transparency</p>
             </li>
             <li>
               <p className="slider-titles">{transparency}</p>
