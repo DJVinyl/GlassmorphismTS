@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-// import ColorPicker from "material-ui-color-picker";
+import ColorPicker from "material-ui-color-picker";
 import TextBox from "../TextBox/TextBox";
 import './CSSGenerator.scss'
-
 
 const useStyles = makeStyles({
   root: {
@@ -12,8 +11,21 @@ const useStyles = makeStyles({
   },
 });
 
+type rgbColor = {
+  r: number;
+  g: number;
+  b: number;
+}
+
 export default function CSSGenerator() {
   const classes = useStyles();
+
+  // const [color, setColor] = useState<string>('#292929')
+  const [colorRGB, setColorRGB] = useState<rgbColor>({
+    r: 41,
+    g: 41,
+    b: 41
+  })
   const [blur, setBlur] = useState<number>(20);
   const [transparency, setTransparency] = useState<number>(0.1);
 
@@ -25,6 +37,21 @@ export default function CSSGenerator() {
     setTransparency(newValue as number);
   };
 
+  function hexToRgb(hex:string): any {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+
+  // const handleColor = (hexColor:string):void => {
+  //   const rgbObj = hexToRgb(hexColor);
+  //   setColorRGB(rgbObj);
+  // }
+
+
   return (
     <div className="css-generator">
       <br></br>
@@ -33,7 +60,7 @@ export default function CSSGenerator() {
         className="dynamic-glass"
         style={{
           margin: "50px",
-          background: `rgba(186, 169, 169, ${transparency})`,
+          background: `rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, ${transparency})`,
           boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
           backdropFilter: `blur(${blur}px)`,
           WebkitBackdropFilter: `blur(${blur}px)`,
@@ -43,20 +70,33 @@ export default function CSSGenerator() {
       >
         <TextBox
           text={
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
+            took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
+            but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
           }
         />
-        {/* <div className="background-color-changer">
+        <div className="background-color-changer">
             <p>Background Color:</p>
             <ColorPicker
               name="color"
-              value={color}
+              value={colorRGB}
               onChange={(color) => {
-                setColor(color);
+                // console.log(color)
+                // console.log(hexToRgb(color))
+                // setColor(color);
+                const rgbObj = hexToRgb(color);
+                setColorRGB((prevState) => {
+                  return {
+                    ...rgbObj
+                  }
+                })
               }}
             />
-          </div> */}
-        <h3 className="css-code-title"> CSS Code: </h3>
+          </div>
+        <h3 className="css-code-title"> CSS Code For Glass: </h3>
         <section className="css-code">
           <code>
             background: rgba(186, 169, 169, {transparency}),<br></br>
