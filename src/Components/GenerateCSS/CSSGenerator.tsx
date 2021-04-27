@@ -14,16 +14,15 @@ const useStyles = makeStyles({
 
 export default function CSSGenerator() {
   const classes = useStyles();
-  const [blur, setBlur] = useState(20);
-  const [transparency, setTransparency] = useState(0);
+  const [blur, setBlur] = useState<number>(20);
+  const [transparency, setTransparency] = useState<number>(0.1);
 
-
-  const handleBlur = (event, newValue) => {
-    setBlur(newValue);
+  const handleBlur = (event: any, newValue:number|number[]):void => {
+    setBlur(newValue as number);
   };
 
-  const handleTransparency = (event, newValue) => {
-    setTransparency(newValue);
+  const handleTransparency = (event: any, newValue:number|number[]):void => {
+    setTransparency(newValue as number);
   };
 
   return (
@@ -82,7 +81,7 @@ export default function CSSGenerator() {
             value={blur}
             onChange={handleBlur}
             aria-labelledby="continuous-slider"
-            defaultValue={20}
+            defaultValue={blur}
             min={0}
             max={20}
             step={0.25}
