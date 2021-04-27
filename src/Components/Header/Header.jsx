@@ -20,6 +20,7 @@ export default function Header() {
         <GlassBox>
           <Hello/>
         </GlassBox>
+        <br></br>
     </div>
   )
 }

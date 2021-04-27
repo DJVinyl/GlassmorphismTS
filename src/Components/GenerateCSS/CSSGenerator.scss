@@ -12,11 +12,21 @@
   display: flex;
   justify-content: left;
   background: rgba(0, 0, 0, 0.7);
-  margin-right: 800px;
+  margin-right: 900px;
   color: white;
+  font-size: 12px;
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 20.0px );
   -webkit-backdrop-filter: blur( 20.0px );
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.slider-titles {
+  color: white;
+
+}
+
+.slider-title {
+  color: white;
 }

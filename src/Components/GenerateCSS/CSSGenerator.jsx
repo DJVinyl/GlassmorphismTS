@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import ColorPicker from "material-ui-color-picker";
+// import ColorPicker from "material-ui-color-picker";
 import TextBox from "../TextBox/TextBox";
 import './CSSGenerator.scss'
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 
 export default function CSSGenerator() {
   const classes = useStyles();
-  const [blur, setBlur] = useState(0);
+  const [blur, setBlur] = useState(20);
   const [transparency, setTransparency] = useState(0);
 
 
@@ -27,27 +27,27 @@ export default function CSSGenerator() {
   };
 
   return (
-    <>
-      <div className="css-generator">
-        <h2 className="gen-title">CSS Generator:</h2>
-        <div
-          className="dynamic-glass"
-          style={{
-            margin: "50px",
-            background: `rgba(186, 169, 169, ${transparency})`,
-            boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-            backdropFilter: `blur(${blur}px)`,
-            webkitBackdropFilter: `blur(${blur}px)`,
-            borderRadius: `10px`,
-            border: `1px solid rgba(255, 255, 255, 0.18)`
-          }}
-        >
-          <TextBox
-            text={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
-          />
-          {/* <div className="background-color-changer">
+    <div className="css-generator">
+      <br></br>
+      <h2 className="gen-title">CSS Generator:</h2>
+      <div
+        className="dynamic-glass"
+        style={{
+          margin: "50px",
+          background: `rgba(186, 169, 169, ${transparency})`,
+          boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+          backdropFilter: `blur(${blur}px)`,
+          WebkitBackdropFilter: `blur(${blur}px)`,
+          borderRadius: `10px`,
+          border: `1px solid rgba(255, 255, 255, 0.18)`,
+        }}
+      >
+        <TextBox
+          text={
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          }
+        />
+        {/* <div className="background-color-changer">
             <p>Background Color:</p>
             <ColorPicker
               name="color"
@@ -57,7 +57,7 @@ export default function CSSGenerator() {
               }}
             />
           </div> */}
-          <section className='css-code'>
+        <section className="css-code">
           <code>
             background: rgba(186, 169, 169, {transparency}),<br></br>
             boxShadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),<br></br>
@@ -66,33 +66,47 @@ export default function CSSGenerator() {
             border-radius: 10px,<br></br>
             border: 1px solid rgba(255, 255, 255, 0.18)
           </code>
-          </section>
+        </section>
 
-          <h3> GlassBox Modifiers </h3>
-          <div className={classes.root}>
-            <p>Blur {blur}</p>
-            <Slider
-              value={blur}
-              onChange={handleBlur}
-              aria-labelledby="continuous-slider"
-              defaultValue={20}
-              min={0}
-              max={20}
-              step={0.25}
-            />
-            <p>Transparency {transparency}</p>
-            <Slider
-              value={transparency}
-              onChange={handleTransparency}
-              aria-labelledby="continuous-slider"
-              defaultValue={0.1}
-              min={0}
-              max={1}
-              step={0.1}
-            />
-          </div>
+        <h3 className="slider-title"> GlassBox Modifiers </h3>
+        <div className={classes.root}>
+          <ul>
+            <li>
+              <p className="slider-titles">Blur</p>
+            </li>
+            <li>
+              <p className="slider-titles">{blur}</p>
+            </li>
+          </ul>
+          <Slider
+            value={blur}
+            onChange={handleBlur}
+            aria-labelledby="continuous-slider"
+            defaultValue={20}
+            min={0}
+            max={20}
+            step={0.25}
+          />
+          <ul>
+            <li>
+              <p className="slider-titles">Transparency {transparency}</p>
+            </li>
+            <li>
+              <p className="slider-titles">{transparency}</p>
+            </li>
+          </ul>
+
+          <Slider
+            value={transparency}
+            onChange={handleTransparency}
+            aria-labelledby="continuous-slider"
+            defaultValue={0.1}
+            min={0}
+            max={1}
+            step={0.1}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 }
