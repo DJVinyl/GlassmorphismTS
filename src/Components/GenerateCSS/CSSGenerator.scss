@@ -9,14 +9,21 @@
 }
 .css-code-title {
   color: white;
+  text-align:center;
+}
+
+.customizer {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .css-code {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.7);
-  margin-right: 900px;
   color: white;
+  margin-left: 30vw;
+  margin-right: 30vw;
   font-size: 12px;
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 20.0px );

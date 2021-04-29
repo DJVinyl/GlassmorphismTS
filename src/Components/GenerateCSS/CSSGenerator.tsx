@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+
 import Slider from "@material-ui/core/Slider";
 import ColorPicker from "material-ui-color-picker";
 import TextBox from "../TextBox/TextBox";
@@ -8,8 +13,25 @@ import './CSSGenerator.scss'
 const useStyles = makeStyles({
   root: {
     width: 200,
-  },
+  }
 });
+
+const muiTheme = createMuiTheme({
+  overrides: {
+    MuiSlider: {
+      thumb: {
+        color: "white",
+      },
+      track: {
+        color: "blue"
+      },
+      rail: {
+        color: "grey"
+      }
+    }
+  }
+});
+
 
 type rgbColor = {
   r: number;
@@ -74,17 +96,28 @@ export default function CSSGenerator() {
         }}
       >
         <TextBox
-          text={
-            `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          text={`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
             took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
             but also the leap into electronic typesetting, remaining essentially unchanged. 
             It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-          }
+            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`}
         />
-        <div className="background-color-changer">
-        <h3 className="slider-title"> Glass Color </h3>
+        <h3 className="css-code-title"> CSS Code For Glass: </h3>
+        <section className="css-code">
+          <code>
+            background: rgba({colorRGB.r}, {colorRGB.g}, {colorRGB.b},{" "}
+            {transparency}),<br></br>
+            boxShadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),<br></br>
+            backdrop-filter: blur({blur}px),<br></br>
+            -webkit-backdrop-filter: blur({blur}px),<br></br>
+            border-radius: 10px,<br></br>
+            border: 1px solid rgba(255, 255, 255, 0.18)
+          </code>
+        </section>
+        <section className="customizer">
+          <div className="background-color-changer">
+            <h3 className="slider-title"> Glass Color </h3>
             <ColorPicker
               name="color"
               value={color}
@@ -93,56 +126,51 @@ export default function CSSGenerator() {
               }}
             />
           </div>
-        <h3 className="css-code-title"> CSS Code For Glass: </h3>
-        <section className="css-code">
-          <code>
-            background: rgba({colorRGB.r}, {colorRGB.g}, {colorRGB.b}, {transparency}),<br></br>
-            boxShadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),<br></br>
-            backdrop-filter: blur({blur}px),<br></br>
-            -webkit-backdrop-filter: blur({blur}px),<br></br>
-            border-radius: 10px,<br></br>
-            border: 1px solid rgba(255, 255, 255, 0.18)
-          </code>
+          <div className={classes.root}>
+          <h3 className="slider-title"> GlassBox Modifiers </h3>
+            <ul>
+              <li>
+                <p className="slider-titles">Blur</p>
+              </li>
+              <li>
+                <p className="slider-titles">{blur}</p>
+              </li>
+            </ul>
+            <ThemeProvider theme={muiTheme}>
+            <Slider
+              value={blur}
+              onChange={handleBlur}
+              aria-labelledby="continuous-slider"
+              defaultValue={blur}
+              color={'primary'}
+              min={0}
+              max={20}
+              step={0.25}
+            />
+            </ThemeProvider>
+            <ul>
+              <li>
+                <p className="slider-titles">Transparency</p>
+              </li>
+              <li>
+                <p className="slider-titles">{transparency}</p>
+              </li>
+            </ul>
+            <ThemeProvider theme={muiTheme}>
+            <Slider
+              value={transparency}
+              onChange={handleTransparency}
+              aria-labelledby="continuous-slider"
+              defaultValue={0.1}
+              color={'primary'}
+              min={0}
+              max={1}
+              step={0.1}
+            />
+            </ThemeProvider>
+          </div>
         </section>
-
-        <h3 className="slider-title"> GlassBox Modifiers </h3>
-        <div className={classes.root}>
-          <ul>
-            <li>
-              <p className="slider-titles">Blur</p>
-            </li>
-            <li>
-              <p className="slider-titles">{blur}</p>
-            </li>
-          </ul>
-          <Slider
-            value={blur}
-            onChange={handleBlur}
-            aria-labelledby="continuous-slider"
-            defaultValue={blur}
-            min={0}
-            max={20}
-            step={0.25}
-          />
-          <ul>
-            <li>
-              <p className="slider-titles">Transparency</p>
-            </li>
-            <li>
-              <p className="slider-titles">{transparency}</p>
-            </li>
-          </ul>
-
-          <Slider
-            value={transparency}
-            onChange={handleTransparency}
-            aria-labelledby="continuous-slider"
-            defaultValue={0.1}
-            min={0}
-            max={1}
-            step={0.1}
-          />
-        </div>
+        <p><br></br></p>
       </div>
     </div>
   );
